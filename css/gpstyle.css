@@ -2,7 +2,7 @@ input[type=radio] {
 	margin-right: 6px;
 }
 
-.h4{
+.h4, h4{
 	font-style: italic;
 	color: #bbb;
 }
