@@ -9,7 +9,7 @@ title: GLO-PRO map
 <link rel="stylesheet" href="/css/gpstyle.css">
 
 <div id="new_container">
-    <h1>GLO-PRO EML CVD map, sample of 13 countries</h1>
+    <h1>GLO-PRO Essential Cardiac Medicines map, sample of 13 countries</h1>
     <div id="map" style="position: relative; width: 1100px; height: 500px;"></div>
 </div>
  
@@ -68,13 +68,11 @@ title: GLO-PRO map
 
     }
 
+    // make a copy of atorvastatin data to begin
     var starting_data = JSON.parse(JSON.stringify(atorvastatin_data));
 
     var map = new Datamap({
         element: document.getElementById('map'),
-        // fills: {
-     //        defaultFill: 'rgba(23,48,210,0.9)' // Any hex, color name or rgb/rgba value
-     //    }
 
         fills: {
             YES: 'green',
