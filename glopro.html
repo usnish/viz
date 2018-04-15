@@ -1,0 +1,55 @@
+---
+layout: default
+title: GLO-PRO map
+---
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+<script src="datamaps.world.min.js"></script>
+<link rel="stylesheet" href="gpstyle.css">
+
+
+<div id="map" style="position: relative; width: 1000px; height: 450px;"></div>
+
+
+<script>
+    var map = new Datamap({
+    	element: document.getElementById('map'),
+    	// fills: {
+     //        defaultFill: 'rgba(23,48,210,0.9)' // Any hex, color name or rgb/rgba value
+     //    }
+
+     	fills: {
+            HIGH: '#afafaf',
+            LOW: '#123456',
+            MEDIUM: 'blue',
+            UNKNOWN: 'rgb(0,0,0)',
+            defaultFill: 'green'
+        },
+        data: {
+            IRL: {
+                fillKey: 'LOW',
+                numberOfThings: 2002
+            },
+            USA: {
+                fillKey: 'MEDIUM',
+                numberOfThings: 10381
+            }
+        },
+
+         geographyConfig: {
+            popupTemplate: function(geo, data) {
+                return ['<div class="hoverinfo"><strong>',
+                        'Number of things in ' + geo.properties.name,
+                        ': ' + data.numberofthincgs,
+                        '</strong></div>'].join('');
+            }
+        }
+
+    });
+
+    map.legend();
+
+
+</script>
+
