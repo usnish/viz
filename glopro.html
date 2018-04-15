@@ -8,41 +8,90 @@ title: GLO-PRO map
 <script src="http://www.usnish.org/viz/glo-pro/datamaps.world.min.js"></script>
 <link rel="stylesheet" href="/css/gpstyle.css">
 
+<div id="new_container">
+    <h1>GLO-PRO EML CVD map, sample of 13 countries</h1>
+    <div id="map" style="position: relative; width: 1100px; height: 500px;"></div>
+</div>
+ 
+    <h2 style="margin-top:50px">Select drug of interest</h2>
 
-<div id="map" style="position: relative; width: 1000px; height: 450px;"></div>
+<form id="form" style="position=relative;">
+    <input type="radio" name="option" value="atorvastatin_data" checked="checked">atorvastatin<br>
+    <input type="radio" name="option" value="simvastatin_data" >simvastatin<br>
+</form>
+</div>
+
 
 
 <script>
+
+    drug = 'atorvastatin'
+
+    var does_does_not = {
+        "YES": "does",
+        "NO": "does not"
+    }
+
+    var atorvastatin_data = {
+
+        AFG: {fillKey: 'YES', updated: 2014},
+        DZA: {fillKey: 'YES', updated: 2006},
+        AGO: {fillKey: 'NO', updated: 2012},
+        ARG: {fillKey: 'NO', updated: 2010},
+        ARM: {fillKey: 'NO', updated: 2010},
+        BGD: {fillKey: 'NO', updated: 2008},
+        BLZ: {fillKey: 'NO', updated: 2009},
+        BTN: {fillKey: 'YES', updated: 2012},
+        BOL: {fillKey: 'YES', updated: 2011},
+        BWA: {fillKey: 'YES', updated: 2012},
+        BRA: {fillKey: 'NO', updated: 2010},
+        BGR: {fillKey: 'NO', updated: 2009},
+        BFA: {fillKey: 'NO', updated: 2008}
+
+    }
+
+    var simvastatin_data = {
+
+        AFG: {fillKey: 'YES'},
+        DZA: {fillKey: 'YES'},
+        AGO: {fillKey: 'YES'},
+        ARG: {fillKey: 'YES'},
+        ARM: {fillKey: 'NO'},
+        BGD: {fillKey: 'NO'},
+        BLZ: {fillKey: 'YES'},
+        BTN: {fillKey: 'NO'},
+        BOL: {fillKey: 'NO'},
+        BWA: {fillKey: 'NO'},
+        BRA: {fillKey: 'YES'},
+        BGR: {fillKey: 'YES'},
+        BFA: {fillKey: 'NO'}
+
+    }
+
+    var starting_data = JSON.parse(JSON.stringify(atorvastatin_data));
+
     var map = new Datamap({
-    	element: document.getElementById('map'),
-    	// fills: {
+        element: document.getElementById('map'),
+        // fills: {
      //        defaultFill: 'rgba(23,48,210,0.9)' // Any hex, color name or rgb/rgba value
      //    }
 
-     	fills: {
-            HIGH: '#afafaf',
-            LOW: '#123456',
-            MEDIUM: 'blue',
-            UNKNOWN: 'rgb(0,0,0)',
-            defaultFill: 'green'
+        fills: {
+            YES: 'green',
+            NO: 'red',
+            UNKNOWN: '#ddd',
+            defaultFill: '#ddd'
         },
-        data: {
-            IRL: {
-                fillKey: 'LOW',
-                numberOfThings: 2002
-            },
-            USA: {
-                fillKey: 'MEDIUM',
-                numberOfThings: 10381
-            }
-        },
+        data: starting_data,
 
          geographyConfig: {
+            popupOnHover: true,
+
             popupTemplate: function(geo, data) {
-                return ['<div class="hoverinfo"><strong>',
-                        'Number of things in ' + geo.properties.name,
-                        ': ' + data.numberofthincgs,
-                        '</strong></div>'].join('');
+                return ['<div class="hoverinfo">',
+                        '<u>'+geo.properties.name + '</u> ', 
+                        '<strong>'+does_does_not[data.fillKey]+'</strong>',' have ' + drug + ' in its national formulary. Last updated ', '<strong>'+ data.updated.toString() + '. </strong>',
+                        '</div>'].join('');
             }
         }
 
@@ -50,6 +99,18 @@ title: GLO-PRO map
 
     map.legend();
 
+    // var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+
+    // for (var i = 0, j = countries.length; i < j; i++) {
+    //     console.log(countries[i].id, countries[i].properties.name);
+    // }
+
+    d3.selectAll("input[name='option']").on("change", function(){
+        drug = this.value.slice(0,-5)
+        map.updateChoropleth(eval(this.value));
+        console.log();
+    });
+
+
 
 </script>
-
