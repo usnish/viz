@@ -65,11 +65,12 @@ title: GLO-PRO map
 
     map.legend();
 
-    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+    // // FOR DEBUGGING
+    // var countries = Datamap.prototype.worldTopo.objects.world.geometries;
 
-    for (var i = 0, j = countries.length; i < j; i++) {
-        console.log(countries[i].id, countries[i].properties.name);
-    }
+    // for (var i = 0, j = countries.length; i < j; i++) {
+    //     console.log(countries[i].id, countries[i].properties.name);
+    // }
 
     d3.selectAll("input[name='option']").on("change", function(){
         drug = this.value.slice(0,-5)
