@@ -7,17 +7,18 @@ title: GLO-PRO map
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
 <script src="http://www.usnish.org/viz/glo-pro/datamaps.world.min.js"></script>
 <script src="http://www.usnish.org/viz/data/data.js"></script>
-<link rel="stylesheet" href="http://www.usnish.org/viz/css/gpstyle.css">
-
-<div id="new_container">
-    <h1>GLO-PRO Essential Cardiac Medicines</h1>
-    <div id="map" style="position: relative; width: 1100px; height: 500px;"></div>
-</div>
- 
-    <h3 style="margin-top:50px">Select medicine to visualize:</h3>
+<link rel="stylesheet" href="/css/gpstyle.css">
 
 
-<form id="form" style="position=relative;">
+<div class="row">
+  <div class="col-sm-10">
+    <h1>GLO-PRO Essential Cardiac Medicines Map</h1>
+    <div id="map" style="position: relative; width: 100%; height: 500px;"></div>
+  </div>
+
+  <div class="col-sm-2 sidebar">
+    <h3>Select medicine to visualize:</h3>
+    <form id="form" style="position:relative; height: 400px; overflow:scroll;">
     <h4 style="margin-bottom:0px">Statins</h4>
         <input type="radio" name="option" value="atorvastatin_data" checked="checked">atorvastatin<br>
         <input type="radio" name="option" value="simvastatin_data">simvastatin<br>
@@ -54,7 +55,7 @@ title: GLO-PRO map
     <h4 style="margin-bottom:0px">Salicylates</h4>
         <input type="radio" name="option" value="aspirin_data">aspirin<br>
 
-    <h4 style="margin-bottom:0px">ACE Inhibitors</h4>
+    <h4 style="margin-bottom:0px">ACE inhibitors</h4>
         <input type="radio" name="option" value="captopril_data">captopril<br>
         <input type="radio" name="option" value="enalapril_data">enalapril<br>
         <input type="radio" name="option" value="lisinopril_data">lisinopril<br>
@@ -80,9 +81,15 @@ title: GLO-PRO map
 
     <h4 style="margin-bottom:0px">Control: Penicillin</h4>
         <input type="radio" name="option" value="penicillin_data">penicillin<br>
+    </form>
 
-</form>
+    <div id ='scrolltext'> scroll down to see more options &#8595 </div>
+    
+
+  </div>
 </div>
+
+
 
 
 <script>
